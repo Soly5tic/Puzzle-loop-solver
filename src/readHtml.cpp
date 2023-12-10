@@ -12,7 +12,7 @@ using namespace std;
 void readHTMLFile(const int N, const int M, string inputName, int **saveProblem) {
     string s;
     using namespace readHtmlGlobalVariables;
-    ifstream fin(FOLDR + inputName.c_str());
+    ifstream fin((FOLDR + inputName).c_str());
     if (!fin.is_open()) {
         cerr << "ERR failed to open file" << endl;
         assert(0);
