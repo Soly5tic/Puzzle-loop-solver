@@ -51,6 +51,20 @@ namespace solverGlobalVariables {
         }
     };
     Dsu dsu;
+
+	struct extEdge {
+		bool tp, val;
+		int x, y, depv;
+		extEdge() {}
+		extEdge(bool tp, int x, int y, bool val, int depv) : tp(tp), x(x), y(y), val(val), depv(depv) {}
+		bool operator < (const extEdge& b) const {
+			return make_pair(depv, make_pair(x, make_pair(y, make_pair(tp, val))))
+					 > make_pair(b.depv, make_pair(b.x, make_pair(b.y, make_pair(b.tp, b.val))));
+		}
+	};
+	set <extEdge> g[2][MXN][MXN][2];
+	vector <extEdge> tmp[2][MXN][MXN][2];
+	int adjSiz[2][MXN][MXN][2];
 }
 
 // set all unknown edges as non-cycle edges
@@ -150,7 +164,7 @@ bool chkOddDegrees() {
 
 // Search from the edge (stp, sx, sy) for all edges of which the status can be confirmed
 // return 0 if contradiction, -1 if found solution, other values indicate edge count
-int Bfs(int stp, int sx, int sy, bool chkOdd) {
+int Bfs(int stp, int sx, int sy, bool chkOdd, int cdep, bool addG) {
     using namespace solverGlobalVariables;
 	//bool DEBUG = (stp == 1 && sx == 0 && sy == 13 && d[sx][sy]);
 	bool DEBUG = 0;
@@ -163,6 +177,10 @@ int Bfs(int stp, int sx, int sy, bool chkOdd) {
 		// assert(cur.val == 0 || cur.val == 1);
 		// if (DEBUG) cout << "ext " << cur.type << " " << cur.x << " " << cur.y << " " << cur.val << endl;
 		que.pop();
+		if (addG) {
+			tmp[stp][sx][sy][getVal(sx, sy, stp)].push_back(extEdge(cur.type, cur.x, cur.y, cur.val, cdep));
+			tmp[cur.type][cur.x][cur.y][!cur.val].push_back(extEdge(stp, sx, sy, !getVal(sx, sy, stp), cdep));
+		}
 		rtv++;
 		if (cur.val) {
 			bool ok;
@@ -175,6 +193,14 @@ int Bfs(int stp, int sx, int sy, bool chkOdd) {
 					return -1;
 				}
 			}
+		}
+		// extend known relationships
+		for (extEdge e : g[cur.type][cur.x][cur.y][getVal(cur.x, cur.y, cur.type)]) {
+			if (getVal(e.x, e.y, e.tp) == -1) {
+				if (e.tp == 0) r[e.x][e.y] = e.val;
+				else d[e.x][e.y] = e.val;
+				que.push(Node(e.tp, e.x, e.y, e.val));
+			} else if (getVal(e.x, e.y, e.tp) != e.val) return 0;
 		}
 		if (cur.type == 0) {
 			// horizontal line
@@ -442,36 +468,52 @@ bool Dfs(int dep) {
 	vector <Node> ext;
 	start:;
 	int pos = dsu.stk.size(); memcpy(td, d, sizeof(td)); memcpy(tr, r, sizeof(tr));
+	auto Revert = [&](bool flg) -> void {
+		memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r));
+		dsu.Rollback(pos);
+		if (flg) {
+			for (int s = 0;s < 2;s++) {
+				for (int i = 0;i <= n;i++) {
+					for (int j = 0;j <= m;j++) {
+						for (int v = 0;v < 2;v++) {
+							while (!g[s][i][j][v].empty() && g[s][i][j][v].begin()->depv > dep) g[s][i][j][v].erase(g[s][i][j][v].begin());
+							adjSiz[s][i][j][v] = g[s][i][j][v].size();
+						}
+					}
+				}
+			}
+		}
+	};
 	if (VISIBLE) Print(dep, mxdep, dfscnt, n, m, a, r, d, _TIME_);
 	for (int chkOdd = 0;chkOdd < 2;chkOdd++) {
 		//Print();
 		//cout << tr[0][0] << endl;
 		for (int i = 0;i <= n;i++) {
 			for (int j = 0;j < m;j++) {
-				memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r));
-				dsu.Rollback(pos);
+				Revert(0);
 				if (r[i][j] >= 0) continue;
 				r[i][j] = 0;
-				if (!(rc[i][j][0] = Bfs(0, i, j, chkOdd))) {
+				if (!(rc[i][j][0] = Bfs(0, i, j, chkOdd, dep, 0))) {
 					//cout << 0 << " " << i << " " << j << " 0" << endl;
-					memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r));
+					Revert(0);
 					//if (!i && !j) Print();
-					dsu.Rollback(pos);
 					r[i][j] = 1;
-					if (!Bfs(0, i, j, chkOdd)) return 0;
+					int tres = Bfs(0, i, j, chkOdd, dep, 0);
+					if (tres == 0) return 0;
+					else if (tres == -1) return 1;
 					goto start;
 				} else if (rc[i][j][0] == -1) {
 					return 1;
 				} else {
-					memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r));
-					dsu.Rollback(pos);
+					Revert(0);
 					r[i][j] = 1;
-					if (!(rc[i][j][1] = Bfs(0, i, j, chkOdd))) {
+					if (!(rc[i][j][1] = Bfs(0, i, j, chkOdd, dep, 0))) {
 						//cout << 0 << " " << i << " " << j << " 1" << endl;
-						memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r));
-						dsu.Rollback(pos);
+						Revert(0);
 						r[i][j] = 0;
-						if (!Bfs(0, i, j, chkOdd)) return 0;
+						int tres = Bfs(0, i, j, chkOdd, dep, 0);
+						if (tres == 0) return 0;
+						else if (tres == -1) return 1;
 						goto start;
 					} else if (rc[i][j][1] == -1) {
 						return 1;
@@ -482,26 +524,30 @@ bool Dfs(int dep) {
 		//Print();
 		for (int i = 0;i < n;i++) {
 			for (int j = 0;j <= m;j++) {
-				memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+				Revert(0);
 				if (d[i][j] >= 0) continue;
 				d[i][j] = 0;
-				if (!(dc[i][j][0] = Bfs(1, i, j, chkOdd))) {
+				if (!(dc[i][j][0] = Bfs(1, i, j, chkOdd, dep, 0))) {
 					//cout << 1 << " " << i << " " << j << " 0" << endl;
 					//if (i == 49 && j == 32) Print();
-					memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+					Revert(0);
 					d[i][j] = 1;
-					if (!Bfs(1, i, j, chkOdd)) return 0;
+					int tres = Bfs(1, i, j, chkOdd, dep, 0);
+					if (tres == 0) return 0;
+					else if (tres == -1) return 1;
 					goto start;
 				} else if (dc[i][j][0] == -1) {
 					return 1;
 				} else {
-					memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+					Revert(0);
 					d[i][j] = 1;
-					if (!(dc[i][j][1] = Bfs(1, i, j, chkOdd))) {
+					if (!(dc[i][j][1] = Bfs(1, i, j, chkOdd, dep, 0))) {
 						//cout << 1 << " " << i << " " << j << " 1" << endl;
-						memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+						Revert(0);
 						d[i][j] = 0;
-						if (!Bfs(1, i, j, chkOdd)) return 0;
+						int tres = Bfs(1, i, j, chkOdd, dep, 0);
+						if (tres == 0) return 0;
+						else if (tres == -1) return 1;
 						goto start;
 					} else if (dc[i][j][1] == -1) {
 						return 1;
@@ -510,6 +556,48 @@ bool Dfs(int dep) {
 			}
 		}
 	}
+	for (int i = 0;i <= n;i++) {
+		for (int j = 0;j < m;j++) {
+			if (r[i][j] == -1) {
+				Revert(0);
+				r[i][j] = 0;
+				assert(Bfs(0, i, j, 0, dep, 1) > 0);
+				Revert(0);
+				r[i][j] = 1;
+				assert(Bfs(0, i, j, 0, dep, 1) > 0);
+				Revert(0);
+			}
+		}
+	}
+	for (int i = 0;i < n;i++) {
+		for (int j = 0;j <= m;j++) {
+			if (d[i][j] == -1) {
+				Revert(0);
+				d[i][j] = 0;
+				assert(Bfs(1, i, j, 0, dep, 1) > 0);
+				Revert(0);
+				d[i][j] = 1;
+				assert(Bfs(1, i, j, 0, dep, 1) > 0);
+				Revert(0);
+			}
+		}
+	}
+	bool flgExt = 0;
+	for (int s = 0;s < 2;s++) {
+		for (int i = 0;i <= n;i++) {
+			for (int j = 0;j <= m;j++) {
+				for (int v = 0;v < 2;v++) {
+					for (auto x : tmp[s][i][j][v]) g[s][i][j][v].insert(x);
+					tmp[s][i][j][v].clear();
+					if (g[s][i][j][v].size() != adjSiz[s][i][j][v]) {
+						adjSiz[s][i][j][v] = g[s][i][j][v].size();
+						flgExt = 1;
+					}
+				}
+			}
+		}
+	}
+	if (flgExt) goto start;
 	ext.clear();
 	//cout << "pass" << endl;
 	for (int i = 0;i <= n;i++) {
@@ -529,14 +617,18 @@ bool Dfs(int dep) {
 		}
 	}
 	sort(ext.begin(), ext.end());
+	if (ext.empty()) {
+		if (chkValid()) return 1;
+		else return 0;
+	}
 	for (Node x : ext) {
-		memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+		Revert(0);
 		if (x.type == 0) {
 			if (x.val > 0) r[x.x][x.y] = 0;
 			else r[x.x][x.y] = 1;
-			Bfs(0, x.x, x.y, 0);
+			Bfs(0, x.x, x.y, 0, dep, 0);
 			if (Dfs(dep + 1)) return 1;
-			memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+			Revert(1);
 			if (x.val > 0) {
 				r[x.x][x.y] = 1;
 				if (!dsu.Merge(x.x * (m + 1) + x.y, x.x * (m + 1) + x.y + 1)) {
@@ -551,9 +643,9 @@ bool Dfs(int dep) {
 		} else {
 			if (x.val > 0) d[x.x][x.y] = 0;
 			else d[x.x][x.y] = 1;
-			Bfs(1, x.x, x.y, 0);
+			Bfs(1, x.x, x.y, 0, dep, 0);
 			if (Dfs(dep + 1)) return 1;
-			memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+			Revert(1);
 			if (x.val > 0) {
 				d[x.x][x.y] = 1;
 				if (!dsu.Merge(x.x * (m + 1) + x.y, (x.x + 1) * (m + 1) + x.y)) {
@@ -567,7 +659,8 @@ bool Dfs(int dep) {
 			goto start;
 		}
 	}
-	memcpy(d, td, sizeof(d)); memcpy(r, tr, sizeof(r)); dsu.Rollback(pos);
+	Revert(1);
+	return 0;
 }
 
 bool Solve(int in, int im, int *ia[], bool _VISIBLE) {

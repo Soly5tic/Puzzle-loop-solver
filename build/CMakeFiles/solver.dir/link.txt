@@ -1,0 +1,2 @@
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\ar.exe qc libsolver.a CMakeFiles/solver.dir/src/solver.cpp.obj
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\ranlib.exe libsolver.a

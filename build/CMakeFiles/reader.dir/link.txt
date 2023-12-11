@@ -1,0 +1,2 @@
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\ar.exe qc libreader.a CMakeFiles/reader.dir/src/readHtml.cpp.obj
+C:\PROGRA~2\Dev-Cpp\MinGW64\bin\ranlib.exe libreader.a

@@ -6,6 +6,4 @@ using namespace std;
 
 bool Solve(int, int, int **, bool);
 
-#else
-#warning test
 #endif

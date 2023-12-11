@@ -1,3 +1,5 @@
+#pragma GCC optimize("Ofast","-funroll-loops")
+#pragma GCC target("sse4.1","sse4.2","ssse3","sse3","sse2","sse","avx2","avx","popcnt","tune=native")
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -33,6 +35,6 @@ int main(int argc, char** argv) {
             }
         } else break;
     }
-    for (int i = 0;i < 55;i++) delete a[i];
+    for (int i = 0;i < 55;i++) delete [] a[i];
     return 0;
 }
