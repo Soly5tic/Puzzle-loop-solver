@@ -1,4 +1,57 @@
 # Puzzle-loop-solver
-An automatic solver for the Slither Link puzzle (aka. Fences, Loop the Loop)
+一个 Slither Link（aka. 数回、Fences、Loop the loop）的自动求解器。
 
-Currently featuring only basic puzzle-solving.
+## 使用方法
+
+运行 `main.exe`。
+
+### 模式 1：从 <https://www.puzzle-loop.com> 的 HTML 文件中读取题目并求解
+
+在 <https://www.puzzle-loop.com> 上打开一道谜题，按 F12 打开开发工具，并按 Ctrl+S 保存 HTML 代码至文件。**注意需要保存完整代码而不是仅 HTML / 单个文件。**
+
+之后在 `main.exe` 中输入 `1 <谜题行数> <谜题列数> <保存的 HTML 文件的完整路径>` 并按 Enter，将自动完成题目求解。如果有解，则会显示该解并在解的下方提示 `Found solution`；如果无解，则会显示 `No solution`。
+
+### 模式 2：从文本文件中读取题目并求解
+
+文本文件的格式应为：
+
+- 第一行两个空格分隔的整数，依次表示谜题行数/列数。
+- 接下来一个字符矩阵表示谜题中每个格子的信息，没有限制的格子用字符 `-` 表示，其余格子依次用数字 `0/1/2/3/4` 表示。
+
+如下图所示谜题：
+
+![1.png](https://s2.loli.net/2023/12/12/YOhlWsGNKfX3Tm8.png)
+
+转化为文本文件应为：
+
+```plain
+5 5
+-3320
+--1-2
+--2--
+-2323
+-2---
+```
+
+之后在 `main.exe` 中输入 `2 <文本文件的完整路径>` 并按 Enter，将自动完成题目求解，显示格式与模式 1 相同。
+
+### 模式 3：从 <https://www.puzzle-loop.com> 的 HTML 文件中读取题目并求解，并自动在 <https://www.puzzle-loop.com> 中提交
+
+HTML 文件的保存和模式 1 相同。
+
+之后在 `main.exe` 中输入 `3 <谜题行数> <谜题列数> <保存的 HTML 文件的完整路径>` 并按 Enter，将自动完成题目求解。
+
+如果有解，你需要将焦点保持在网页的谜题操作部分，并通过按方向键进入键盘操作模式（此时应该出现一个蓝色圆圈），并移动该蓝色圆圈至左上角，同时保证谜题状态为初始状态（可以按 Start Over）。在完成求解 15 秒之后，求解器将通过键盘操作完成题目并提交。
+
+**注意这里会使用虚拟键盘操作，因此请不要中途改变焦点，否则键盘输入可能被其他程序接收造成意外的后果。**
+
+### 模式 4：在 <https://www.puzzle-loop.com> 上自动连续求解（实验性功能）
+
+在 `main.exe` 中输入 `4 <谜题行数> <谜题列数> <求解次数>`，并在 <https://www.puzzle-loop.com> 上打开相同规模的谜题，并将焦点保持在浏览器界面。求解器将使用虚拟键盘操作连续完成多次求解。
+
+在开始连续求解前需要点击下图中的 `Pin ads`，否则会影响求解器通过 Tab 跳转到新的谜题。
+
+![2.png](https://s2.loli.net/2023/12/12/DeoCmEALMk1qf4v.png)
+
+**注意这里也会使用虚拟键盘操作，且该功能为实验性功能，不保证稳定性。**
+

@@ -66,6 +66,8 @@ all: CMakeFiles/main.dir/all
 all: CMakeFiles/reader.dir/all
 all: CMakeFiles/solver.dir/all
 all: CMakeFiles/interface.dir/all
+all: CMakeFiles/submit.dir/all
+all: CMakeFiles/autorun.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -77,6 +79,8 @@ clean: CMakeFiles/main.dir/clean
 clean: CMakeFiles/reader.dir/clean
 clean: CMakeFiles/solver.dir/clean
 clean: CMakeFiles/interface.dir/clean
+clean: CMakeFiles/submit.dir/clean
+clean: CMakeFiles/autorun.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -86,14 +90,16 @@ clean: CMakeFiles/interface.dir/clean
 CMakeFiles/main.dir/all: CMakeFiles/reader.dir/all
 CMakeFiles/main.dir/all: CMakeFiles/solver.dir/all
 CMakeFiles/main.dir/all: CMakeFiles/interface.dir/all
+CMakeFiles/main.dir/all: CMakeFiles/submit.dir/all
+CMakeFiles/main.dir/all: CMakeFiles/autorun.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=3,4 "Built target main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=5,6 "Built target main"
 .PHONY : CMakeFiles/main.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 0
 .PHONY : CMakeFiles/main.dir/rule
@@ -114,7 +120,7 @@ CMakeFiles/main.dir/clean:
 CMakeFiles/reader.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\reader.dir\build.make CMakeFiles/reader.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\reader.dir\build.make CMakeFiles/reader.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=5,6 "Built target reader"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=7,8 "Built target reader"
 .PHONY : CMakeFiles/reader.dir/all
 
 # Build rule for subdir invocation for target.
@@ -140,7 +146,7 @@ CMakeFiles/reader.dir/clean:
 CMakeFiles/solver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\solver.dir\build.make CMakeFiles/solver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\solver.dir\build.make CMakeFiles/solver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=7,8 "Built target solver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=9,10 "Built target solver"
 .PHONY : CMakeFiles/solver.dir/all
 
 # Build rule for subdir invocation for target.
@@ -166,7 +172,7 @@ CMakeFiles/solver.dir/clean:
 CMakeFiles/interface.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\interface.dir\build.make CMakeFiles/interface.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\interface.dir\build.make CMakeFiles/interface.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=1,2 "Built target interface"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=3,4 "Built target interface"
 .PHONY : CMakeFiles/interface.dir/all
 
 # Build rule for subdir invocation for target.
@@ -184,6 +190,58 @@ interface: CMakeFiles/interface.dir/rule
 CMakeFiles/interface.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\interface.dir\build.make CMakeFiles/interface.dir/clean
 .PHONY : CMakeFiles/interface.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/submit.dir
+
+# All Build rule for target.
+CMakeFiles/submit.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=11,12 "Built target submit"
+.PHONY : CMakeFiles/submit.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/submit.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/submit.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 0
+.PHONY : CMakeFiles/submit.dir/rule
+
+# Convenience name for target.
+submit: CMakeFiles/submit.dir/rule
+.PHONY : submit
+
+# clean rule for target.
+CMakeFiles/submit.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/clean
+.PHONY : CMakeFiles/submit.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/autorun.dir
+
+# All Build rule for target.
+CMakeFiles/autorun.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles --progress-num=1,2 "Built target autorun"
+.PHONY : CMakeFiles/autorun.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/autorun.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/autorun.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\OI\Computer-project\puzzle-loop-2\build\CMakeFiles 0
+.PHONY : CMakeFiles/autorun.dir/rule
+
+# Convenience name for target.
+autorun: CMakeFiles/autorun.dir/rule
+.PHONY : autorun
+
+# clean rule for target.
+CMakeFiles/autorun.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/clean
+.PHONY : CMakeFiles/autorun.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

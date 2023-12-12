@@ -306,4 +306,7 @@ CMakeFiles/main.dir/src/main.cpp.obj: \
  C:/PROGRA~2/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/unordered_set \
  C:/PROGRA~2/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/unordered_set.h \
  D:\OI\Computer-project\puzzle-loop-2\src\solver.h \
- D:\OI\Computer-project\puzzle-loop-2\src\readHtml.h
+ D:\OI\Computer-project\puzzle-loop-2\src\interface.h \
+ D:\OI\Computer-project\puzzle-loop-2\src\readHtml.h \
+ D:\OI\Computer-project\puzzle-loop-2\src\submit.h \
+ D:\OI\Computer-project\puzzle-loop-2\src\autoRun.h

@@ -167,6 +167,56 @@ interface/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\interface.dir\build.make CMakeFiles/interface.dir/build
 .PHONY : interface/fast
 
+#=============================================================================
+# Target rules for targets named submit
+
+# Build rule for target.
+submit: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 submit
+.PHONY : submit
+
+# fast build rule for target.
+submit/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/build
+.PHONY : submit/fast
+
+#=============================================================================
+# Target rules for targets named autorun
+
+# Build rule for target.
+autorun: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 autorun
+.PHONY : autorun
+
+# fast build rule for target.
+autorun/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/build
+.PHONY : autorun/fast
+
+src/autoRun.obj: src/autoRun.cpp.obj
+.PHONY : src/autoRun.obj
+
+# target to build an object file
+src/autoRun.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/src/autoRun.cpp.obj
+.PHONY : src/autoRun.cpp.obj
+
+src/autoRun.i: src/autoRun.cpp.i
+.PHONY : src/autoRun.i
+
+# target to preprocess a source file
+src/autoRun.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/src/autoRun.cpp.i
+.PHONY : src/autoRun.cpp.i
+
+src/autoRun.s: src/autoRun.cpp.s
+.PHONY : src/autoRun.s
+
+# target to generate assembly for a file
+src/autoRun.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\autorun.dir\build.make CMakeFiles/autorun.dir/src/autoRun.cpp.s
+.PHONY : src/autoRun.cpp.s
+
 src/interface.obj: src/interface.cpp.obj
 .PHONY : src/interface.obj
 
@@ -263,6 +313,30 @@ src/solver.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\solver.dir\build.make CMakeFiles/solver.dir/src/solver.cpp.s
 .PHONY : src/solver.cpp.s
 
+src/submit.obj: src/submit.cpp.obj
+.PHONY : src/submit.obj
+
+# target to build an object file
+src/submit.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/src/submit.cpp.obj
+.PHONY : src/submit.cpp.obj
+
+src/submit.i: src/submit.cpp.i
+.PHONY : src/submit.i
+
+# target to preprocess a source file
+src/submit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/src/submit.cpp.i
+.PHONY : src/submit.cpp.i
+
+src/submit.s: src/submit.cpp.s
+.PHONY : src/submit.s
+
+# target to generate assembly for a file
+src/submit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\submit.dir\build.make CMakeFiles/submit.dir/src/submit.cpp.s
+.PHONY : src/submit.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -271,10 +345,15 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... autorun
 	@echo ... interface
 	@echo ... main
 	@echo ... reader
 	@echo ... solver
+	@echo ... submit
+	@echo ... src/autoRun.obj
+	@echo ... src/autoRun.i
+	@echo ... src/autoRun.s
 	@echo ... src/interface.obj
 	@echo ... src/interface.i
 	@echo ... src/interface.s
@@ -287,6 +366,9 @@ help:
 	@echo ... src/solver.obj
 	@echo ... src/solver.i
 	@echo ... src/solver.s
+	@echo ... src/submit.obj
+	@echo ... src/submit.i
+	@echo ... src/submit.s
 .PHONY : help
 
 

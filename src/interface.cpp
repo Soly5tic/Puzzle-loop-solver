@@ -12,6 +12,13 @@ namespace interfaceGlobalVariables {
     int R = 0, C = 0;
 }
 
+void interfaceInit() {
+	using namespace interfaceGlobalVariables;
+	memset(cur, 0, sizeof(cur));
+	memset(pCache, 0, sizeof(pCache));
+	R = C = 0;
+}
+
 inline void Movepos(int x, int y) {
 	COORD position;
 	position.X = x; position.Y = y;

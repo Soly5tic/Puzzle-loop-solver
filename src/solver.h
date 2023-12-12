@@ -4,6 +4,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool Solve(int, int, int **, bool);
+bool Solve(int, int, int **, int **, int **, bool);
 
 #endif

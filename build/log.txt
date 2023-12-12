@@ -1,0 +1,8 @@
+子目录或文件 D:\loopTmpFiles 已经存在。
+DBG read complete
+DBG read 2000 cells
+DBG read complete
+DBG read 2000 cells
+DBG read complete
+DBG read 2000 cells
+DBG start solve

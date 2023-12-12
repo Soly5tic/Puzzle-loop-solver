@@ -2,5 +2,7 @@ D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/main.dir
 D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/reader.dir
 D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/solver.dir
 D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/interface.dir
+D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/submit.dir
+D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/autorun.dir
 D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/edit_cache.dir
 D:/OI/Computer-project/puzzle-loop-2/build/CMakeFiles/rebuild_cache.dir

@@ -307,8 +307,11 @@ CMakeFiles/main.dir/src/main.cpp.obj: D:/OI/Computer-project/puzzle-loop-2/src/m
   C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/wctype.h \
+  D:/OI/Computer-project/puzzle-loop-2/src/autoRun.h \
+  D:/OI/Computer-project/puzzle-loop-2/src/interface.h \
   D:/OI/Computer-project/puzzle-loop-2/src/readHtml.h \
-  D:/OI/Computer-project/puzzle-loop-2/src/solver.h
+  D:/OI/Computer-project/puzzle-loop-2/src/solver.h \
+  D:/OI/Computer-project/puzzle-loop-2/src/submit.h
 
 
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/bits/basic_string.h:
@@ -901,6 +904,8 @@ C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/math.h:
 
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/process.h:
 
+D:/OI/Computer-project/puzzle-loop-2/src/interface.h:
+
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/pthread.h:
 
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/pthread_signal.h:
@@ -926,3 +931,7 @@ C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/stdio.h:
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/string.h:
 
 C:/Program\ Files\ (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include/swprintf.inl:
+
+D:/OI/Computer-project/puzzle-loop-2/src/autoRun.h:
+
+D:/OI/Computer-project/puzzle-loop-2/src/submit.h:

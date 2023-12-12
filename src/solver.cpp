@@ -663,7 +663,7 @@ bool Dfs(int dep) {
 	return 0;
 }
 
-bool Solve(int in, int im, int *ia[], bool _VISIBLE) {
+bool Solve(int in, int im, int *ia[], int **ar, int **ad, bool _VISIBLE) {
 	using namespace solverGlobalVariables;
 	cerr << "DBG start solve" << endl;
 	for (int i = 0;i < MXN;i++) a[i] = new int [MXN];
@@ -672,12 +672,29 @@ bool Solve(int in, int im, int *ia[], bool _VISIBLE) {
 		for (int j = 0;j < m;j++) a[i][j] = ia[i][j];
 	}
 	memset(r, -1, sizeof(r)); memset(d, -1, sizeof(d));
+	memset(adjSiz, 0, sizeof(adjSiz));
+	for (int s = 0;s < 2;s++) {
+		for (int i = 0;i <= n;i++) {
+			for (int j = 0;j <= m;j++) {
+				for (int v = 0;v < 2;v++) {
+					g[s][i][j][v].clear();
+					tmp[s][i][j][v].clear();
+				}
+			}
+		}
+	}
 	VISIBLE = _VISIBLE;
 	mxdep = dfscnt = 0;
 	_TIME_ = clock();
 	dsu.Init();
 	if (Dfs(1)) {
 		Print(mxdep, mxdep, dfscnt, n, m, a, r, d, _TIME_);
+		for (int i = 0;i <= n;i++) {
+			for (int j = 0;j < m;j++) ar[i][j] = r[i][j];
+		}
+		for (int i = 0;i < n;i++) {
+			for (int j = 0;j <= m;j++) ad[i][j] = d[i][j];
+		}
 		return 1;
 	}
 	return 0;

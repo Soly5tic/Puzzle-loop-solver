@@ -9,13 +9,18 @@ using namespace std;
 
 // read a HTML file downloaded from puzzle-loop.com
 // need to specify puzzle size
-void readHTMLFile(const int N, const int M, string inputName, int **saveProblem) {
+int readHTMLFile(const int N, const int M, string inputName, int **saveProblem) {
+    if (N > 50 || M > 50) {
+        cout << "ERROR: Too large puzzle size, support only puzzles with height and width less than or equal to 50" << endl;
+        return -1;
+    }
     string s;
     using namespace readHtmlGlobalVariables;
-    ifstream fin((FOLDR + inputName).c_str());
+    ifstream fin((inputName).c_str());
     if (!fin.is_open()) {
         cerr << "ERR failed to open file" << endl;
-        assert(0);
+        cout << "ERROR: failed to open file" << endl;
+        return -1;
     }
     string t;
     while (getline(fin, t)) s += t;
@@ -44,6 +49,10 @@ void readHTMLFile(const int N, const int M, string inputName, int **saveProblem)
     }
     cerr << "DBG read complete" << endl;
     cerr << "DBG read " << a.size() << " cells" << endl;
+    if (a.size() != N * M) {
+        cout << "ERROR incorrect puzzle size: expected " << N << "*" << M << "=" << N * M << "cells, found " << a.size() << " cells" << endl;
+        return -1;
+    }
     int pnt = 0;
     for (int i = 1;i <= N;i++) {
         for (int j = 1;j <= M;j++) {
@@ -51,12 +60,22 @@ void readHTMLFile(const int N, const int M, string inputName, int **saveProblem)
             pnt++;
         }
     }
+    return 0;
 }
 
 // Read the plain text version
-void readPlainText(string inputName, int &n, int &m, int **a) {
+int readPlainText(string inputName, int &n, int &m, int **a) {
     ifstream fin(inputName.c_str());
+    if (!fin.is_open()) {
+        cerr << "ERR failed to open file" << endl;
+        cout << "ERROR: failed to open file" << endl;
+        return -1;
+    }
 	fin >> n >> m;
+    if (n > 50 || m > 50) {
+        cout << "ERROR: Too large puzzle size, support only puzzles with height and width less than or equal to 50" << endl;
+        return -1;
+    }
 	for (int i = 0;i < n;i++) {
 		for (int j = 0;j < m;j++) {
 			char c; fin >> c;
@@ -64,4 +83,6 @@ void readPlainText(string inputName, int &n, int &m, int **a) {
 			else a[i][j] = c - '0';
 		}
 	}
+    cerr << "DBG read complete" << endl;
+    return 0;
 }

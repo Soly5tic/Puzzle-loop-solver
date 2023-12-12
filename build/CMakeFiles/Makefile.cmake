@@ -53,4 +53,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/reader.dir/DependInfo.cmake"
   "CMakeFiles/solver.dir/DependInfo.cmake"
   "CMakeFiles/interface.dir/DependInfo.cmake"
+  "CMakeFiles/submit.dir/DependInfo.cmake"
+  "CMakeFiles/autorun.dir/DependInfo.cmake"
   )

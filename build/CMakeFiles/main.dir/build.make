@@ -94,6 +94,8 @@ main.exe: CMakeFiles/main.dir/build.make
 main.exe: libreader.a
 main.exe: libsolver.a
 main.exe: libinterface.a
+main.exe: libsubmit.a
+main.exe: libautorun.a
 main.exe: CMakeFiles/main.dir/linkLibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
